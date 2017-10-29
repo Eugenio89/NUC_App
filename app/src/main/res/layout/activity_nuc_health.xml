@@ -168,6 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onRadioButtonClickedAF"
                     android:text="Sedentary" />
 
                 <TextView
@@ -185,6 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onRadioButtonClickedAF"
                     android:text="Lightly Active" />
 
                 <TextView
@@ -202,6 +204,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onRadioButtonClickedAF"
                     android:text="Moderately Active" />
 
                 <TextView
@@ -219,6 +222,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onRadioButtonClickedAF"
                     android:text="Very Active" />
 
                 <TextView
@@ -236,6 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="onRadioButtonClickedAF"
                     android:text="Extremely Active" />
 
                 <TextView
@@ -325,18 +330,18 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/textView59"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
-                android:text="Based on the data inserted, NUC recommends you:"
+                android:text="Based on the data inserted, you are:"
                 android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
-                android:id="@+id/recommendation"
+                android:id="@+id/bmi_type"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:layout_marginEnd="8dp"
@@ -345,14 +350,35 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/calculate_button"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:text="NUC recommends you the following Juices:"
+                android:textColor="@color/cardview_dark_background"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/recommendation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="32dp"
+                android:gravity="right"
+                app:layout_constraintBaseline_toBaselineOf="@+id/calculate_button"
+                app:layout_constraintEnd_toEndOf="parent" />
+
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/button_go_juices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Go to Recipe!"
+                android:text="Go to Juices List!"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
