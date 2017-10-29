@@ -39,6 +39,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="32dp"
                 android:text="Insert your Height in meters:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -60,6 +61,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="24dp"
                 android:text="Insert your Weight in Kilograms:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -81,6 +83,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:text="Insert your Age in Years:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -102,6 +105,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
                 android:text="Insert your Gender:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
@@ -146,19 +150,105 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Insert your Activity Factor:"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
-            <EditText
-                android:id="@+id/editText6"
-                android:layout_width="match_parent"
+            <RadioGroup
+                android:id="@+id/RadioActivityFactor"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="16dp"
+                android:elevation="0dp">
+
+                <RadioButton
+                    android:id="@+id/Sedentary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sedentary" />
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="32dp"
+                    android:text="Very little or no exercise, and desk job."
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/LightlyActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lightly Active" />
+
+                <TextView
+                    android:id="@+id/textView55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="32dp"
+                    android:text="Light exercise 1 to 3 days per week."
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/ModeratelyActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Moderately Active" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="32dp"
+                    android:text="Moderate exercise 3 to 5 days per week."
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/VeryActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Very Active" />
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="32dp"
+                    android:text="Heavy exercise 6 to 7 days per week."
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+                <RadioButton
+                    android:id="@+id/ExtremelyActive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Extremely Active" />
+
+                <TextView
+                    android:id="@+id/textView58"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="32dp"
+                    android:text="Very intense exercise, and physical job, exercise multiple times per day."
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+
+            </RadioGroup>
 
             <Button
                 android:id="@+id/calculate_button"
@@ -178,6 +268,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="32dp"
                 android:text="Your Body Mass Index (BMI) is:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calculate_button" />
 
@@ -198,6 +289,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Your Basal Metabolic Rate (BMR) is:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calculate_button" />
 
@@ -218,6 +310,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Your Total Daily Energy Expenditure (TDEE) is:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/calculate_button" />
 
@@ -236,15 +329,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="16dp"
                 android:text="Based on the data inserted, NUC recommends you:"
+                android:textColor="@color/cardview_dark_background"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/recommendation"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="32dp"
+                android:gravity="right"
+                app:layout_constraintBaseline_toBaselineOf="@+id/calculate_button"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
@@ -253,17 +357,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText6" />
-
-            <EditText
-                android:id="@+id/EditText_copy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
-                app:layout_constraintRight_toRightOf="parent" />
 
         </LinearLayout>
     </ScrollView>
