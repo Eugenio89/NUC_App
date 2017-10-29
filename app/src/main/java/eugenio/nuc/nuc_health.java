@@ -24,9 +24,10 @@ public class nuc_health extends AppCompatActivity {
     EditText edad;
     TextView bmi_result;
     TextView bmr_result;
+    TextView tdee_result;
     Button calculate_button;
 
-    double height, weight, age, bmi, bmr;
+    double height, weight, age, bmi, bmr, tdee;
 
 
 
@@ -49,8 +50,6 @@ public class nuc_health extends AppCompatActivity {
                     weight = Double.parseDouble(peso.getText().toString());
                     age = Double.parseDouble(edad.getText().toString());
                     bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-
-
                 break;
 
             case R.id.radio_female:
@@ -63,10 +62,101 @@ public class nuc_health extends AppCompatActivity {
                     weight = Double.parseDouble(peso.getText().toString());
                     age = Double.parseDouble(edad.getText().toString());
                     bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-
                 break;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    public void onRadioButtonClickedAF(View view) {
+        //Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        //Check which radio button was clicked
+        switch (view.getId()) {
+
+            case R.id.Sedentary:
+                if (checked)
+                    //male formula
+                    altura = (EditText)findViewById(R.id.altura);
+                    peso = (EditText)findViewById(R.id.peso);
+                    edad = (EditText)findViewById(R.id.edad);
+                    height = Double.parseDouble(altura.getText().toString());
+                    weight = Double.parseDouble(peso.getText().toString());
+                    age = Double.parseDouble(edad.getText().toString());
+                    tdee = bmr * 1.2;
+                break;
+
+            case R.id.LightlyActive:
+                if (checked)
+                    //female formula
+                    altura = (EditText)findViewById(R.id.altura);
+                    peso = (EditText)findViewById(R.id.peso);
+                    edad = (EditText)findViewById(R.id.edad);
+                    height = Double.parseDouble(altura.getText().toString());
+                    weight = Double.parseDouble(peso.getText().toString());
+                    age = Double.parseDouble(edad.getText().toString());
+                    tdee = bmr * 1.375;
+                break;
+
+            case R.id.ModeratelyActive:
+                if (checked)
+                    //female formula
+                    altura = (EditText)findViewById(R.id.altura);
+                peso = (EditText)findViewById(R.id.peso);
+                edad = (EditText)findViewById(R.id.edad);
+                height = Double.parseDouble(altura.getText().toString());
+                weight = Double.parseDouble(peso.getText().toString());
+                age = Double.parseDouble(edad.getText().toString());
+                tdee = bmr * 1.55;
+                break;
+
+            case R.id.VeryActive:
+                if (checked)
+                    //female formula
+                    altura = (EditText)findViewById(R.id.altura);
+                peso = (EditText)findViewById(R.id.peso);
+                edad = (EditText)findViewById(R.id.edad);
+                height = Double.parseDouble(altura.getText().toString());
+                weight = Double.parseDouble(peso.getText().toString());
+                age = Double.parseDouble(edad.getText().toString());
+                tdee = bmr * 1.725;
+                break;
+
+            case R.id.ExtremelyActive:
+                if (checked)
+                    //female formula
+                    altura = (EditText)findViewById(R.id.altura);
+                peso = (EditText)findViewById(R.id.peso);
+                edad = (EditText)findViewById(R.id.edad);
+                height = Double.parseDouble(altura.getText().toString());
+                weight = Double.parseDouble(peso.getText().toString());
+                age = Double.parseDouble(edad.getText().toString());
+                tdee = bmr * 1.9;
+                break;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -100,9 +190,30 @@ public class nuc_health extends AppCompatActivity {
                 //Show Double with Decimal Format
                 bmi_result.setText(new DecimalFormat("##.##").format(bmi));
 
+
+
+
+
+
+
+
                 //Show Double to String
                 final TextView txtValue = (TextView) findViewById(R.id.bmr_result);
                 txtValue.setText(Double.toString(bmr));
+
+
+
+
+
+
+
+
+                final TextView txtValue2 = (TextView) findViewById(R.id.tdee_result);
+                txtValue2.setText(Double.toString(tdee));
+
+
+
+                //tdee_result.setText(new DecimalFormat("##.##").format(tdee));
 
 
 
