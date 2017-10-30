@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
@@ -50,10 +51,9 @@
             <ListView
                 android:id="@+id/listMessage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_above="@+id/sendButton"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" >
+                android:layout_alignParentLeft="true">
 
             </ListView>
 
@@ -65,6 +65,95 @@
                 android:layout_alignParentRight="true"
                 android:enabled="false"
                 android:text="Send" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/listMessage"
+                android:layout_alignParentStart="true">
+
+                <LinearLayout
+                    android:id="@+id/Nuevo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Juicer Control"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="18sp" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupControl"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:longClickable="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+                        <RadioButton
+                            android:id="@+id/radioForward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:layout_weight="1"
+                            android:onClick="onRadioButtonClickedControl"
+                            android:text="Forward Operation"
+                            android:textColorLink="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/radioReverse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="0dp"
+                            android:layout_weight="1"
+                            android:onClick="onRadioButtonClickedControl"
+                            android:text="Reverse Operation"
+                            android:textColorLink="@color/colorPrimary"
+                            android:textSize="14sp" />
+
+                        <RadioButton
+                            android:id="@+id/radioOff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:onClick="onRadioButtonClickedControl"
+                            android:text="Turn OFF"
+                            android:textColorLink="@android:color/holo_green_light"
+                            android:textSize="14sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:text="Current State of the Motor"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/radioGroupControl" />
+
+                    <TextView
+                        android:id="@+id/current_state2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                </LinearLayout>
+            </ScrollView>
 
         </RelativeLayout>
     </LinearLayout>

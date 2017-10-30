@@ -54,6 +54,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -63,9 +64,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+
+
+
+
 
 
 
@@ -88,8 +96,73 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private ArrayAdapter<String> listAdapter;
     private Button btnConnectDisconnect,btnSend;
     private EditText edtMessage;
+
+
+
+
+//********************************************************************************************
+//***********************RADIO BUTTONS FOR JUICER CONTROL*************************************
+    String state;
+
+    public void onRadioButtonClickedControl(View view) {
+        //Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        //Check which radio button was clicked
+        int i = view.getId();
+        if (i == R.id.radioForward) {
+            if (checked)
+
+                state = "Forward";
+            TextView tv = (TextView) findViewById(R.id.current_state2);
+            tv.setText("The Juicer Motor is operating in FORWARD mode");
+
+
+        } else if (i == R.id.radioReverse) {
+            if (checked)
+                state = "Reverse";
+            TextView tv2 = (TextView) findViewById(R.id.current_state2);
+            tv2.setText("The Juicer Motor is operating in REVERSE mode.");
+
+
+        } else if (i == R.id.radioOff) {
+            if (checked)
+                state = "OFF";
+            TextView tv3 = (TextView) findViewById(R.id.current_state2);
+            tv3.setText("The Juicer Motor is currently OFF");
+
+
+        }
+    }
+//*********************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
+
+
+
+
+
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -145,17 +218,18 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             	byte[] value;
 				try {
 					//send data to service
-					value = message.getBytes("UTF-8");
+					//value = message.getBytes("UTF-8"); //esta es la original, la de abajo vale nada
+                    value = state.getBytes("UTF-8");
 					mService.writeRXCharacteristic(value);
 					//Update the log with time stamp
 					String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
-					listAdapter.add("["+currentDateTimeString+"] TX: "+ message);
-               	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+					//listAdapter.add("["+currentDateTimeString+"] TX: "+ message); //este es el original, el de abajo es en el que empezaste a hacer huevadas
+                    listAdapter.add("["+currentDateTimeString+"] TX: "+ state + message);
+					messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
                     //**********************************************************
                     //Comparar lo que envia la App para prendido y apagado con los radio button
                     //TX: Desde la Tablet
-
 
 
 
@@ -457,4 +531,19 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             .show();
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
