@@ -218,13 +218,17 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             	byte[] value;
 				try {
 					//send data to service
+                    //**************************************************************************************************************************************************
 					//value = message.getBytes("UTF-8"); //esta es la original, la de abajo vale nada
                     value = state.getBytes("UTF-8");
+                    //***************************************************************************************************************************************************
 					mService.writeRXCharacteristic(value);
 					//Update the log with time stamp
 					String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+					//***************************************************************************************************************************************************
 					//listAdapter.add("["+currentDateTimeString+"] TX: "+ message); //este es el original, el de abajo es en el que empezaste a hacer huevadas
                     listAdapter.add("["+currentDateTimeString+"] TX: "+ state + message);
+                    //***************************************************************************************************************************************************
 					messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
                     //**********************************************************
@@ -351,8 +355,11 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                         	 	listAdapter.add("["+currentDateTimeString+"] RX: "+text);
                         	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
-                        	 	//**********************************************************
-                                //Intento de mostrar lo recibido desde el adafruit en la app
+                        	 	//****************************************************************************
+                                //Intento de mostrar lo recibido desde el adafruit en la app (El Protocolo)
+
+                                     TextView tv4 = (TextView) findViewById(R.id.state_juicer);
+                                     tv4.setText(text);
 
 
 
@@ -368,9 +375,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
 
 
-
-
-                        	 	//************************************************************
+                        	 	//*****************************************************************************
 
                         	
                          } catch (Exception e) {
