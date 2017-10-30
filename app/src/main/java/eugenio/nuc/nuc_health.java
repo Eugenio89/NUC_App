@@ -1,5 +1,6 @@
 package eugenio.nuc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -65,6 +66,7 @@ public class nuc_health extends AppCompatActivity {
                 break;
         }
     }
+
 
 
 
@@ -157,15 +159,23 @@ public class nuc_health extends AppCompatActivity {
 
 
 
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_nuc_health);
+
+    //Boton para ir a la Actividad Basic Juices
+
+        final Button button = findViewById(R.id.button_go_juices);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //codigo
+                    startActivity(new Intent(nuc_health.this, BasicJuices.class));
+            }
+        });
+
 
         //Variables
 
@@ -179,51 +189,91 @@ public class nuc_health extends AppCompatActivity {
         //Acciones cuando se presiona el boton de calcular
 
         calculate_button.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 //Aqui van las operaciones
 
                 height = Double.parseDouble(altura.getText().toString());
                 weight = Double.parseDouble(peso.getText().toString());
-                bmi = weight/(height*height);
+                bmi = weight / (height * height);
 
-                //Show Double with Decimal Format
+                //Show Double with Decimal Format BMI
                 bmi_result.setText(new DecimalFormat("##.##").format(bmi));
 
 
-
-
-
-
-
-
-                //Show Double to String
+                //Show Double to String BMR
                 final TextView txtValue = (TextView) findViewById(R.id.bmr_result);
                 txtValue.setText(Double.toString(bmr));
 
 
-
-
-
-
-
-
+                //Show Double to String TDEE
                 final TextView txtValue2 = (TextView) findViewById(R.id.tdee_result);
                 txtValue2.setText(Double.toString(tdee));
 
 
+                //Recommendacion basada en BMI
 
-                //tdee_result.setText(new DecimalFormat("##.##").format(tdee));
+                if (bmi <= 15) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Very Severely Underweight");
 
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Orange Juice \nGrape Juice ");
+                } else if (bmi > 15 && bmi <= 16) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Severely Underweight");
 
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Carrot and Celery Juice \nPurple Cabbage Juice ");
+                } else if (bmi > 16 && bmi <= 18.5) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Underweight");
 
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Cabbage Juice \nDetox Green Juice \nTangy Tomato ");
+                } else if (bmi > 18.5 && bmi <= 25) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Normal (Healthy Weight)");
 
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Celeb Celery Juice \nPear Juice \nBaby Spinach Juice \nCarrot Juice ");
+                } else if (bmi > 25 && bmi <= 30) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Overweight");
+
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Bell Pepper Juice \n Apple Juice \n Wheatgrass Juice ");
+                } else if (bmi > 30 && bmi <= 35) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Moderately Obese");
+
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Spinach Juice \nMultivitamin Juice \n Pomegranate Juice ");
+                } else if (bmi > 35 && bmi <= 40) {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Severely Obese");
+
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Dreamy Carrot Juice \n Kale Juice ");
+                } else {
+                    TextView tv = (TextView) findViewById(R.id.bmi_type);
+                    tv.setText("Very Severely Obese");
+
+                    TextView tv1 = (TextView) findViewById(R.id.recommendation);
+                    tv1.setText("Celery Juice \nTomato Juice ");
+                }
             }
 
         });
 
 
+
     }
+
+
+
+
+
 
 
 }

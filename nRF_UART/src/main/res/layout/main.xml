@@ -54,6 +54,7 @@
                 android:layout_above="@+id/sendButton"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true" >
+
             </ListView>
 
             <Button

@@ -67,6 +67,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
     private static final int REQUEST_SELECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
@@ -149,6 +151,33 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 					String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
 					listAdapter.add("["+currentDateTimeString+"] TX: "+ message);
                	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+
+                    //**********************************************************
+                    //Comparar lo que envia la App para prendido y apagado con los radio button
+                    //TX: Desde la Tablet
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    //************************************************************
+
+
+
+
+
                	 	edtMessage.setText("");
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -191,7 +220,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
     private final BroadcastReceiver UARTStatusChangeReceiver = new BroadcastReceiver() {
 
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, final Intent intent) {
             String action = intent.getAction();
 
             final Intent mIntent = intent;
@@ -247,6 +276,28 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                          	String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
                         	 	listAdapter.add("["+currentDateTimeString+"] RX: "+text);
                         	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+
+                        	 	//**********************************************************
+                                //Intento de mostrar lo recibido desde el adafruit en la app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        	 	//************************************************************
+
                         	
                          } catch (Exception e) {
                              Log.e(TAG, e.toString());
