@@ -74,9 +74,6 @@ import android.widget.Toast;
 
 
 
-
-
-
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
     private static final int REQUEST_SELECT_DEVICE = 1;
     private static final int REQUEST_ENABLE_BT = 2;
@@ -98,32 +95,48 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private EditText edtMessage;
 
 
+    public int aux = 0;
 
 
-//********************************************************************************************
+    //********************************************************************************************
 //***********************RADIO BUTTONS FOR JUICER CONTROL*************************************
     String state;
+
+
+
+
 
     public void onRadioButtonClickedControl(View view) {
         //Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
+
+
         //Check which radio button was clicked
         int i = view.getId();
         if (i == R.id.radioForward) {
             if (checked)
-
-                state = "Forward";
-            TextView tv = (TextView) findViewById(R.id.current_state2);
-            tv.setText("The Juicer Motor is operating in FORWARD mode");
-
+                if (aux == 1) {
+                    state = "Forward";
+                    TextView tv = (TextView) findViewById(R.id.current_state2);
+                    tv.setText("The Juicer Motor is operating in FORWARD mode");
+                }
+                else{
+                    TextView tv = (TextView) findViewById(R.id.current_state2);
+                    tv.setText("Please lock the Juicer");
+                }
 
         } else if (i == R.id.radioReverse) {
             if (checked)
-                state = "Reverse";
-            TextView tv2 = (TextView) findViewById(R.id.current_state2);
-            tv2.setText("The Juicer Motor is operating in REVERSE mode.");
-
+                if (aux == 1) {
+                    state = "Reverse";
+                    TextView tv2 = (TextView) findViewById(R.id.current_state2);
+                    tv2.setText("The Juicer Motor is operating in REVERSE mode.");
+                }
+                else{
+                    TextView tv = (TextView) findViewById(R.id.current_state2);
+                    tv.setText("Please lock the Juicer");
+                }
 
         } else if (i == R.id.radioOff) {
             if (checked)
@@ -133,14 +146,47 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
 
         }
+
+
+        //desde aqui la cagaste (lo que dijo el profe para que mande directo cuando aplasto el radio button)
+
+//        EditText editText = (EditText) findViewById(R.id.sendText);
+//        String message = editText.getText().toString();
+        byte[] value;
+        try {
+            //send data to service
+            //**************************************************************************************************************************************************
+            //value = message.getBytes("UTF-8"); //esta es la original, la de abajo vale nada
+            value = state.getBytes("UTF-8");
+            //***************************************************************************************************************************************************
+            mService.writeRXCharacteristic(value);
+            //Update the log with time stamp
+            String currentDateTimeString = DateFormat.getTimeInstance().format(new Date());
+            //***************************************************************************************************************************************************
+            //listAdapter.add("["+currentDateTimeString+"] TX: "+ message); //este es el original, el de abajo es en el que empezaste a hacer huevadas
+            listAdapter.add("["+currentDateTimeString+"] TX: "+ state);
+            //***************************************************************************************************************************************************
+            messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
+
+
+            edtMessage.setText("");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+        // hasta aca
+
+
+
+
+
+
+
+
     }
 //*********************************************************************************************
-
-
-
-
-
-
 
 
 
@@ -243,16 +289,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
 
 
 
-
-
-
-
-
-
-
                     //************************************************************
-
-
 
 
 
@@ -318,7 +355,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                      }
             	 });
             }
-           
+
           //*********************//
             if (action.equals(UartService.ACTION_GATT_DISCONNECTED)) {
             	 runOnUiThread(new Runnable() {
@@ -333,19 +370,19 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                              mState = UART_PROFILE_DISCONNECTED;
                              mService.close();
                             //setUiState();
-                         
+
                      }
                  });
             }
-            
-          
+
+
           //*********************//
             if (action.equals(UartService.ACTION_GATT_SERVICES_DISCOVERED)) {
              	 mService.enableTXNotification();
             }
           //*********************//
             if (action.equals(UartService.ACTION_DATA_AVAILABLE)) {
-              
+
                  final byte[] txValue = intent.getByteArrayExtra(UartService.EXTRA_DATA);
                  runOnUiThread(new Runnable() {
                      public void run() {
@@ -355,29 +392,110 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
                         	 	listAdapter.add("["+currentDateTimeString+"] RX: "+text);
                         	 	messageListView.smoothScrollToPosition(listAdapter.getCount() - 1);
 
-                        	 	//****************************************************************************
+                        	 	//************************************************************************************************************************************
                                 //Intento de mostrar lo recibido desde el adafruit en la app (El Protocolo)
 
                                      TextView tv4 = (TextView) findViewById(R.id.state_juicer);
                                      tv4.setText(text);
 
+                                //vamos a ver si logro descifrar ese protocolo
+
+                                String[] separated = text.split("_");
+                                //separated[0] is the device
+                                //separated[1] is the variable
+                                //separated[2] is the state (B, N, G)
+                                //separeted[3] is the number value
+
+                                if (separated[0].toString().equals("mot") && separated[1].toString().equals("temp") && separated[2].toString().equals("G"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_temp);
+                                    tvmottemp.setText("Good " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("temp") && separated[2].toString().equals("N"))
+                                 {
+                                     TextView tvmottemp = (TextView) findViewById(R.id.motor_temp);
+                                     tvmottemp.setText("Normal " + separated[3].toString());
+                                 }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("temp") && separated[2].toString().equals("B"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_temp);
+                                    tvmottemp.setText("Bad " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("curr") && separated[2].toString().equals("G"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_current);
+                                    tvmottemp.setText("Good " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("curr") && separated[2].toString().equals("N"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_current);
+                                    tvmottemp.setText("Normal " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("curr") && separated[2].toString().equals("B"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_current);
+                                    tvmottemp.setText("Bad " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("volt") && separated[2].toString().equals("G"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_voltage);
+                                    tvmottemp.setText("Good " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("volt") && separated[2].toString().equals("N"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_voltage);
+                                    tvmottemp.setText("Normal " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("mot") && separated[1].toString().equals("volt") && separated[2].toString().equals("B"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.motor_voltage);
+                                    tvmottemp.setText("Bad " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("jui") && separated[1].toString().equals("clea") && separated[2].toString().equals("G"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.juicer_cleanness);
+                                    tvmottemp.setText("Good " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("jui") && separated[1].toString().equals("clea") && separated[2].toString().equals("N"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.juicer_cleanness);
+                                    tvmottemp.setText("Normal " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("jui") && separated[1].toString().equals("clea") && separated[2].toString().equals("B"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.juicer_cleanness);
+                                    tvmottemp.setText("Bad " + separated[3].toString());
+                                }
+
+                                else if (separated[0].toString().equals("jui") && separated[1].toString().equals("lock") && separated[2].toString().equals("G"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.juicer_assembly);
+                                    tvmottemp.setText("Locked " + separated[3].toString());
+                                    aux = 1;
+                                }
+
+                                else if (separated[0].toString().equals("jui") && separated[1].toString().equals("lock") && separated[2].toString().equals("B"))
+                                {
+                                    TextView tvmottemp = (TextView) findViewById(R.id.juicer_assembly);
+                                    tvmottemp.setText("Unlocked " + separated[3].toString());
+                                    aux = 0;
+                                }
 
 
+                        	 	//**************************************************************************************************************************************
 
 
-
-
-
-
-
-
-
-
-
-
-                        	 	//*****************************************************************************
-
-                        	
                          } catch (Exception e) {
                              Log.e(TAG, e.toString());
                          }
@@ -389,8 +507,8 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             	showMessage("Device doesn't support UART. Disconnecting");
             	mService.disconnect();
             }
-            
-            
+
+
         }
     };
 
@@ -511,29 +629,32 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
   
     }
 
+//ESTO ES LO QUE PASA CUANDO APLASTAS EL BOTON DE REGRESAR
+
     @Override
     public void onBackPressed() {
         if (mState == UART_PROFILE_CONNECTED) {
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(startMain);
-            showMessage("nRFUART's running in background.\n             Disconnect to exit");
+//            Intent startMain = new Intent(Intent.ACTION_MAIN);
+//            startMain.addCategory(Intent.CATEGORY_HOME);
+//            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(startMain);
+//            showMessage("nRFUART's running in background.\n             Disconnect to exit");
+            finish();
         }
         else {
-            new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.popup_title)
-            .setMessage(R.string.popup_message)
-            .setPositiveButton(R.string.popup_yes, new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+//            new AlertDialog.Builder(this)
+//            .setIcon(android.R.drawable.ic_dialog_alert)
+//            .setTitle(R.string.popup_title)
+//            .setMessage(R.string.popup_message)
+//            .setPositiveButton(R.string.popup_yes, new DialogInterface.OnClickListener()
+//                {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
    	                finish();
-                }
-            })
-            .setNegativeButton(R.string.popup_no, null)
-            .show();
+//                }
+//            })
+//            .setNegativeButton(R.string.popup_no, null)
+//            .show();
         }
     }
 
