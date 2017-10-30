@@ -275,7 +275,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="bottom|right"
-                    android:text="Explore the configuration \n settings of the NUC \n Whole Slow Juicer. "
+                    android:text="Explore the configuration \n settings and control \n your NUC Whole \nSlow Juicer. "
                     android:textSize="12sp" />
 
                 <TextView
@@ -283,7 +283,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top|right"
-                    android:text="Settings"
+                    android:text="Settings and Control"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -291,7 +291,7 @@
                     android:id="@+id/imageView8"
                     android:layout_width="186dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@drawable/settings" />
+                    app:srcCompat="@drawable/control" />
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
