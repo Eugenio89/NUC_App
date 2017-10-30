@@ -50,8 +50,9 @@ public class nuc_health extends AppCompatActivity {
                     height = Double.parseDouble(altura.getText().toString());
                     weight = Double.parseDouble(peso.getText().toString());
                     age = Double.parseDouble(edad.getText().toString());
-                    bmr = 66 + (6.23 * weight) + (12.7 * height) - (6.76 * age);
-                    //(10 * weight) + (6.25 * height) - (5 * age) + 5;
+                    bmr = (10 * weight) + (6.25 * height*100) - (5 * age) + 5;
+                    //66 + (6.23 * weight) + (12.7 * height) - (6.76 * age);
+
                 break;
 
             case R.id.radio_female:
@@ -63,8 +64,9 @@ public class nuc_health extends AppCompatActivity {
                     height = Double.parseDouble(altura.getText().toString());
                     weight = Double.parseDouble(peso.getText().toString());
                     age = Double.parseDouble(edad.getText().toString());
-                    bmr = 665 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
-                    //(10 * weight) + (6.25 * height) - (5 * age) - 161;
+                    bmr = (10 * weight) + (6.25 * height*100) - (5 * age) - 161;
+                    //665 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
+                    //
                 break;
         }
     }

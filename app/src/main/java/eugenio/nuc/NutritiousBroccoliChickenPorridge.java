@@ -14,7 +14,7 @@ public class NutritiousBroccoliChickenPorridge extends AppCompatActivity {
     }
 
     public void button_ready (View view){
-        Intent intent = new Intent(this, JuicerControl.class);
+        Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
 }

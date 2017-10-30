@@ -13,7 +13,7 @@ public class BasicPurpleCabbageJuice extends AppCompatActivity {
         setContentView(R.layout.activity_basic_purple_cabbage_juice);
     }
     public void button_ready (View view){
-        Intent intent = new Intent(this, JuicerControl.class);
+        Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }
 }
