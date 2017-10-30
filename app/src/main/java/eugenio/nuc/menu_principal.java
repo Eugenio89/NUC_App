@@ -17,7 +17,7 @@ public class menu_principal extends AppCompatActivity {
         configureCardView2();
         configureCardView3();
         configureCardView4();
-        configureCardView5();
+        //configureCardView5();
         configureCardView6();
         configureCardView7();
 
@@ -44,16 +44,16 @@ public class menu_principal extends AppCompatActivity {
 
         }
 
-        private void configureCardView5() {
-            CardView cardView = (CardView) findViewById(R.id.cardView5);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(menu_principal.this, JuicerControl.class));
-                }
-            });
-
-        }
+//        private void configureCardView5() {
+//            CardView cardView = (CardView) findViewById(R.id.cardView5);
+//            cardView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    startActivity(new Intent(menu_principal.this, JuicerControl.class));
+//                }
+//            });
+//
+//        }
 
         private void configureCardView4() {
             CardView cardView = (CardView) findViewById(R.id.cardView4);
